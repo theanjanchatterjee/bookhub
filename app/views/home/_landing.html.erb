@@ -1,0 +1,90 @@
+
+<div id="carousel-landing" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-landing" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-landing" data-slide-to="1"></li>
+	<li data-target="#carousel-landing" data-slide-to="3"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7 carousel-img">
+			<%#= link_to image_tag("slide1.jpg", :alt => "Slide1"), {:class => "img-responsive", :alt => "Responsive image"} %>
+          </div>
+          <div class="col-md-5 carousel-text">
+            <h1>"A book is a dream that you hold in your hand."</h1>
+            <h3>–Neil Gaiman</h3>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7 carousel-img">
+			<%#= link_to image_tag("slide2.jpeg", :alt => "Slide2"), {:class => "img-responsive", :alt => "Responsive image"} %>
+          </div>
+          <div class="col-md-5 carousel-text">
+            <h1>Our Motto</h1>
+            <h3>Your Choice. Your Budget.</h3>
+            <p>Welcome to our family of book lovers. We know the pain when you eagerly want that refined novel but your budget doesn't permit. Henceforth, we are here to provide you the best stuff at best price. Promise!!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+	<div class="item">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7 carousel-img">
+			<%#= link_to image_tag("slide3.jpeg", :alt => "Slide3"), {:class => "img-responsive", :alt => "Responsive image"} %>
+          </div>
+          <div class="col-md-5 carousel-text">
+            <h1>Our Services</h1>
+            <h3>We are there at your doorstep</h3>
+            <p>Don't like delay? Neither do we. Experience our class leading delivery services. Start gifting books to your loved ones. A lot can happen over books.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End slides -->
+  </div>
+  <!-- End wrapper for slides -->
+  
+  <!-- Carousel controls -->
+    <a class="carousel-control left" href="#carousel-landing" data-slide="prev">
+	    <span class="glyphicon glyphicon-chevron-left"></span>
+	</a>
+    <a class="carousel-control right" href="#carousel-landing" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+	
+	
+</div>
+<!-- End carousel -->
+
+<div class="container">
+  <div class="row">
+    <h3 class="text-center">Our offerings</h3>
+    <% if params[:keywords] %>
+      <div data-hook="search_results">
+        <% if @products.empty? %>
+          <h6 class="search-results-title"><%= Spree.t(:no_products_found) %></h6>
+        <% else %>
+          <%= render :partial => 'spree/shared/products', :locals => { :products => @products, :taxon => @taxon } %>
+        <% end %>
+      </div>
+    <% else %>
+      <div data-hook="homepage_products">
+        <% cache(cache_key_for_products) do %>
+          <%= render :partial => 'spree/shared/products', :locals => { :products => @products, :taxon => @taxon } %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
